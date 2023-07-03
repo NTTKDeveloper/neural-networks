@@ -3,14 +3,17 @@ import numpy as np
 import torch 
 import torch.nn as nn
 import torch.optim as optim
+#Tra ve hinh anh va nhan cua anh do
+import data
 
-#Load Image 
-img = cv2.imread("./sample/0/0_1.png")
-img = img.flatten()
-inputs = img/255
+#Load Image
+label = 9
+count = 10
+inputs, result, count = data.loadata(label, count)
 
-result = [1,0,0,0,0,0,0,0,0,0]
+#result = [1,0,0,0,0,0,0,0,0,0]
 
+#Chuyen ve kieu du lieu cua pytorch
 inputs = torch.tensor(inputs, dtype=torch.float32)
 result = torch.tensor(result, dtype=torch.float32)
 
@@ -21,9 +24,9 @@ print(inputs.shape) #torch.Size([2352])
 model = nn.Sequential(
                 nn.Linear(2352,100),
                 nn.ReLU(),
-                nn.Linear(100, 1000),
+                nn.Linear(100, 100),
                 nn.ReLU(),
-                nn.Linear(1000,10),
+                nn.Linear(100,10),
                 nn.Sigmoid()
 )
 
@@ -31,9 +34,9 @@ print(model)
 #Sequential(
 #  (0): Linear(in_features=2352, out_features=100, bias=True)
 #  (1): ReLU()
-#  (2): Linear(in_features=100, out_features=1000, bias=True)
+#  (2): Linear(in_features=100, out_features=100, bias=True)
 #  (3): ReLU()
-#  (4): Linear(in_features=1000, out_features=10, bias=True)
+#  (4): Linear(in_features=100, out_features=10, bias=True)
 #  (5): Sigmoid()
 #)
 
@@ -62,4 +65,6 @@ for epoch in range(n_epochs):
         loss.backward()
         optimizer.step()
     print(f'Finished epoch {epoch}, latest loss {loss}')
+
+torch.save(model, '/home/tuankhanh/Desktop/neural-networks/save/core.pt')
 
