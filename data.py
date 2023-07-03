@@ -27,7 +27,7 @@ def loadata(label, count):
         result = [0, 0, 0, 0, 0, 0, 0, 0, 0 ,1]
     #Load Image 
     #./sample/0/0_1.png
-    img = cv2.imread(path)
+    img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     img = img.flatten()
     inputs = img/255
     return img, result, count
