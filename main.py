@@ -7,7 +7,7 @@ import torch.optim as optim
 import data
 
 #so anh trong mot folder
-num_file = 45
+num_file = 80
 
 #Load Image
 label = 9
