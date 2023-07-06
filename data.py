@@ -30,7 +30,7 @@ def loadata(label, count):
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     img = img.flatten()
     inputs = img/255
-    return img, result, count
+    return inputs, result, count
 
 #label = 9 
 
