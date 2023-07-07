@@ -7,7 +7,7 @@ import torch.optim as optim
 import data
 
 #so anh trong mot folder
-num_file = 80
+num_file = 97
 
 #Load Image
 label = 9
@@ -25,11 +25,11 @@ inputs, result, count = data.loadata(label, count)
 
 #modell
 model = nn.Sequential(
-                nn.Linear(784,100),
+                nn.Linear(784,128),
                 nn.ReLU(),
-                nn.Linear(100, 100),
+                nn.Linear(128, 64),
                 nn.ReLU(),
-                nn.Linear(100,10),
+                nn.Linear(64,10),
                 nn.Sigmoid()
 )
 
@@ -42,6 +42,9 @@ model = nn.Sequential(
 #  (4): Linear(in_features=100, out_features=10, bias=True)
 #  (5): Sigmoid()
 #)
+
+#load lai model cu
+model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
 
 loss_fn = nn.BCELoss() #binary cross entropy
 optimizer = optim.Adam(model.parameters(), lr=0.001)
