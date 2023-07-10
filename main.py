@@ -7,12 +7,12 @@ import torch.optim as optim
 import data
 
 #so anh trong mot folder
-num_file = 97
+num_file = 390
 
 #Load Image
-label = 9
-count = 10
-inputs, result, count = data.loadata(label, count)
+#label = 9
+##count = 10
+#inputs, result, count = data.loadata(label, count)
 
 #result = [1,0,0,0,0,0,0,0,0,0]
 
@@ -44,7 +44,7 @@ model = nn.Sequential(
 #)
 
 #load lai model cu
-model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
+#model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
 
 loss_fn = nn.BCELoss() #binary cross entropy
 optimizer = optim.Adam(model.parameters(), lr=0.001)
@@ -62,6 +62,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 for epoch in range(num_file):
     for i in range(10):
+        #Load data
         label = i 
         count = epoch + 1
         inputs, result, count = data.loadata(label, count)
