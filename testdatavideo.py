@@ -5,7 +5,7 @@ import pyautogui
 import numpy as np
 
 cap = cv2.VideoCapture("Data_1.mp4")
-fps = 1
+fps = 10
 wait_time = 1000/fps
 
 #Load model 
@@ -39,13 +39,13 @@ while True:
     img_3 = process_speed_1(img, 657, 688, 1148, 1166)
     img_3 = cv2.resize(img_3, (28,28))
 
-    cv2.imshow("Image_1", img_2)
+
 
  #   print(img_1.shape)
     #Bien doi data
-    img_2 = img_2.flatten()
+    img_process = img_2.flatten()
 #    print(img_1.shape)
-    inputs = img_2/255
+    inputs = img_process/255
     inputs = torch.tensor(inputs, dtype=torch.float32)
     print(inputs.shape)
 
@@ -53,8 +53,11 @@ while True:
     print(result)
     result_index = torch.argmax(result)
 
-    print(result_index)
-
+    img_2 =  cv2.resize(img_2, (100, 100))
+    img_2 = cv2.cvtColor(img_2, cv2.COLOR_GRAY2BGR)
+    print(int(result_index))
+    cv2.putText(img_2, str(int(result_index)), (5,20), cv2.FONT_HERSHEY_DUPLEX, .7, (0,255,0), 3)
+    cv2.imshow("Image_1", img_2)
 
     delta_time = (time.time() - pre_time)*1000
     delay_time = wait_time - delta_time
