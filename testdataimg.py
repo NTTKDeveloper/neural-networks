@@ -5,14 +5,14 @@ import data
 
 start_time = time.time()
 
-img = cv2.imread("./sample/0/0_0.png", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("./img_test/0.png", cv2.IMREAD_GRAYSCALE)
 img = img.flatten()
 inputs = img/255
 
 inputs = torch.tensor(inputs, dtype=torch.float32)
 
 #Load model
-model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
+model = torch.load("./save/core.pt")
 
 y_pred = model(inputs)
 

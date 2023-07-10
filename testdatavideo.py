@@ -4,12 +4,12 @@ import time
 import pyautogui
 import numpy as np
 
-cap = cv2.VideoCapture("Data_1.mp4")
-fps = 10
+cap = cv2.VideoCapture("./video/data_1.mp4")
+fps = cap.get(cv2.CAP_PROP_FPS)
 wait_time = 1000/fps
 
 #Load model 
-model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
+model = torch.load("./save/core.pt")
 
 
 def process_speed_1(img, y0, y1, x0, x1):
@@ -30,14 +30,14 @@ while True:
     img = cv2.resize(img, (1280,720))
 
 
-    img_1 = process_speed_1(img, 657, 688, 1111, 1134)
-    img_1 = cv2.resize(img_1, (28,28))
+#    img_1 = process_speed_1(img, 657, 688, 1111, 1134)
+#    img_1 = cv2.resize(img_1, (28,28))
 
     img_2 = process_speed_1(img, 657, 688, 1129, 1148)
     img_2 = cv2.resize(img_2, (28,28))
 
-    img_3 = process_speed_1(img, 657, 688, 1148, 1166)
-    img_3 = cv2.resize(img_3, (28,28))
+#    img_3 = process_speed_1(img, 657, 688, 1148, 1166)
+#    img_3 = cv2.resize(img_3, (28,28))
 
 
 
@@ -47,10 +47,10 @@ while True:
 #    print(img_1.shape)
     inputs = img_process/255
     inputs = torch.tensor(inputs, dtype=torch.float32)
-    print(inputs.shape)
+#    print(inputs.shape)
 
     result = model(inputs)
-    print(result)
+#    print(result)
     result_index = torch.argmax(result)
 
     img_2 =  cv2.resize(img_2, (100, 100))

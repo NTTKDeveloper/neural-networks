@@ -44,7 +44,7 @@ model = nn.Sequential(
 #)
 
 #load lai model cu
-#model = torch.load("/home/tuankhanh/Desktop/neural-networks/save/core.pt")
+#model = torch.load("./save/core.pt")
 
 loss_fn = nn.BCELoss() #binary cross entropy
 optimizer = optim.Adam(model.parameters(), lr=0.001)
@@ -81,5 +81,5 @@ for epoch in range(num_file):
 
     print(f'Finished epoch {epoch}, latest loss {loss}')
 
-torch.save(model, '/home/tuankhanh/Desktop/neural-networks/save/core.pt')
+torch.save(model, './save/core.pt')
 
